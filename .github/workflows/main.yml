@@ -11,5 +11,5 @@ jobs:
     runs-on: Raghav
 
     steps:
-      - name: Print the input name to STDOUT
-        run: echo "My First Job Of the workflow"    
+      - name: pass the received secret to an action
+        run: My First Job Of the workflow    
