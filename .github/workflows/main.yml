@@ -8,7 +8,8 @@ on:
 
 jobs:
   print-username:
-    runs-on: Raghav
+    runs-on: [self-hosted, Raghav]
+
 
     steps:
       - name: pass the received secret to an action
