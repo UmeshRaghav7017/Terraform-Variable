@@ -1,4 +1,4 @@
 ProdRg1={
-    name= "raghavrg"
+    name= "RaghavRg001"
     location="East US"
 }
