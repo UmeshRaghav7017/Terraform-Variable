@@ -12,17 +12,14 @@ permissions:
 jobs:
   print-username:
     runs-on: [self-hosted, Raghav]
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
     
     steps:
       - name: Checkout
         uses: actions/checkout@v5.0.0
-
-      - name: Azure Login
-        uses: Azure/login@v2.3.0
-        with:
-          client-id: b3d7f1ed-c4bd-40f2-a5e8-5c07203d99bd
-          tenant-id: 50da6193-f2fa-48aa-a39c-0920c90f25cb
-          subscription-id: 437f4835-1892-425c-b825-0df58a04808d
           
       - name: Terraform fmt
         id: fmt
