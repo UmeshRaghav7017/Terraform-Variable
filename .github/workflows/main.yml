@@ -6,8 +6,8 @@ on:
       - main
       - 'releases/**'
 permissions:
-  issues: write
-  pull-requests: write   
+  id-token: write
+  contents: Read   
   
 jobs:
   print-username:
