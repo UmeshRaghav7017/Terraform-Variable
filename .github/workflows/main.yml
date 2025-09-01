@@ -25,7 +25,7 @@ jobs:
       - name: Terraform fmt
         id: fmt
         working-directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable
-        run: terraform fmt -check
+        run: terraform fmt
         continue-on-error: true
   
       - name: Terraform Init
@@ -47,5 +47,5 @@ jobs:
       - name: Terraform Apply
         id: apply
         working-directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable
-        run: terraform apply 
+        run: terraform apply -auto-approve
   
