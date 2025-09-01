@@ -5,13 +5,14 @@ on:
     branches:
       - main
       - 'releases/**'
-           
+permissions:
+  issues: write
+  pull-requests: write   
+  
 jobs:
   print-username:
     runs-on: [self-hosted, Raghav]
-    permissions:
-      actions: read|write|none 
-
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v5.0.0
