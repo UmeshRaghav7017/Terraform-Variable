@@ -10,7 +10,7 @@ permissions:
   contents: read   
   
 jobs:
-  print-username:
+  Terraform_init_plan_apply_Job:
     runs-on: [self-hosted, Raghav]
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
@@ -45,7 +45,7 @@ jobs:
         continue-on-error: true
 
       - name: Terraform Apply
-        id: Apply
+        id: apply
         working-directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable
-        run: terraform Apply 
+        run: terraform apply 
   
