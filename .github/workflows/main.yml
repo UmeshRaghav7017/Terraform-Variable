@@ -12,5 +12,30 @@ jobs:
 
 
     steps:
-      - name: pass the received secret to an action
-        run: echo "Hello, world!"   
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+
+      - name: Azure Login
+        uses: Azure/login@v2.3.0
+        with:
+          client-id: b3d7f1ed-c4bd-40f2-a5e8-5c07203d99bd
+          tenant-id: 50da6193-f2fa-48aa-a39c-0920c90f25cb
+          subscription-id: 437f4835-1892-425c-b825-0df58a04808d
+          
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+  
+      - name: Terraform Init
+        id: init
+        run: terraform init -input=false
+  
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+  
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color -input=false
+        continue-on-error: true
