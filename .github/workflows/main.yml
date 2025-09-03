@@ -54,7 +54,7 @@ jobs:
          directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable
         
   Terraform_Plan_And_Apply_Job:
-    runs-on: [self-hosted, Raghav]
+    runs-on: ubuntu-latest
     needs: Terraform_Scanning_Job
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
