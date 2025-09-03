@@ -37,17 +37,32 @@ jobs:
         id: validate
         working-directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable
         run: terraform validate 
-        
-  Terraform_Plan_And_Apply_Job:
-    runs-on: [self-hosted, Raghav]
-    needs: Terraform_init_Job
-    steps:
+
       - name: Terraform Plan
         id: plan
         working-directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable
         run: terraform plan -no-color 
         continue-on-error: true
 
+  Terraform_Scanning_Job:
+    runs-on: [self-hosted, Raghav]
+    needs: Terraform_init_Job
+    steps:
+     - name: Checkov GitHub Action
+       uses: bridgecrewio/checkov-action@v12.1347.0
+       with:
+         directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable
+        
+  Terraform_Plan_And_Apply_Job:
+    runs-on: [self-hosted, Raghav]
+    needs: Terraform_Scanning_Job
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+    steps:
+        
       - name: Terraform Apply
         id: apply
         working-directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable
