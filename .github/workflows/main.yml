@@ -10,7 +10,7 @@ permissions:
   contents: read   
   
 jobs:
-  Terraform_init_plan_apply_Job:
+  Terraform_init_Job:
     runs-on: [self-hosted, Raghav]
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
@@ -27,16 +27,7 @@ jobs:
         working-directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable
         run: terraform fmt
         continue-on-error: true
-
-  Scanning_Job:
-    runs-on: server
-     
-    steps:
-      - name: Checkov GitHub Action
-        uses: bridgecrewio/checkov-action@v12.1347.0
-        with:
-           directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable 
-   
+        
       - name: Terraform Init
         id: init
         working-directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable
@@ -46,7 +37,11 @@ jobs:
         id: validate
         working-directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable
         run: terraform validate 
-  
+        
+  Terraform_Plan_And_Apply_Job:
+    runs-on: [self-hosted, Raghav]
+    needs: Terraform_init_Job
+    steps:
       - name: Terraform Plan
         id: plan
         working-directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable
