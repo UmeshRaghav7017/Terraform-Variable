@@ -51,7 +51,7 @@ jobs:
       name: manual-approval  # 👈 This triggers manual approval
     steps:
       - name: Wait for approval
-        run: echo "Waiting for manual approval..
+        run: echo "Waiting for manual approval.."
    
   Terraform_Plan_And_Apply_Job:
     runs-on: ubuntu-latest
