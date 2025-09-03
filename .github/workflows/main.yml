@@ -27,7 +27,16 @@ jobs:
         working-directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable
         run: terraform fmt
         continue-on-error: true
-  
+
+  Scanning_Job:
+    runs-on: server
+     
+    steps:
+      - name: Checkov GitHub Action
+        uses: bridgecrewio/checkov-action@v12.1347.0
+        with:
+           directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable 
+   
       - name: Terraform Init
         id: init
         working-directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable
@@ -48,4 +57,3 @@ jobs:
         id: apply
         working-directory: D:\actions-runner\_work\Terraform-Variable\Terraform-Variable
         run: terraform apply -auto-approve
-  
